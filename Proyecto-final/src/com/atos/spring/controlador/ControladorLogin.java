@@ -20,10 +20,8 @@ public class ControladorLogin {
 	public String login(@RequestParam("username") String u, @RequestParam("password") String p, Model model) {
 		Usuarios us = userService.login(u, p);
 		if(us!=null)
-			return "redirect:/xhtml/menuAdmin.xhtml";
+			return "redirect:/xhtml/paginaSeguraAdmin.jsp";
 		else
-			return "redirect:/inicio.xhtml";
-			
+			return "redirect:/forbidden.jsp";		
 	}
-	
 }

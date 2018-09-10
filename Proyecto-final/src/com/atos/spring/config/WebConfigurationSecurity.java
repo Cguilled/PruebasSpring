@@ -10,16 +10,21 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class WebConfigurationSecurity extends WebSecurityConfigurerAdapter{
 
-	
-	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/xhtml/**").hasAnyRole("ADMIN","USER").anyRequest().authenticated();
-		http.formLogin().loginPage("/inicio.xhtml").permitAll();
+		/*http.authorizeRequests().antMatchers("/xhtml/**").hasAnyRole("ADMIN","USER").anyRequest().authenticated();
+		http.formLogin().loginPage("/login.jsp").permitAll();
 		http.formLogin().loginProcessingUrl("/doLogin").permitAll(); //importante, es la url request del servlet de login de spring security (post)
 		http.formLogin().usernameParameter("username").passwordParameter("password");
-		http.logout().logoutUrl("/doLogout").logoutSuccessUrl("/login.jsp").permitAll();
-		http.exceptionHandling().accessDeniedPage("/control/403");
+		http.logout().logoutUrl("/doLogout").logoutSuccessUrl("/logout.jsp").permitAll();
+		http.exceptionHandling().accessDeniedPage("/forbidden.jsp");*/
+		
+		http.authorizeRequests().anyRequest().authenticated().and().formLogin().loginPage("/login.xhtml").permitAll();
+		http.formLogin().loginProcessingUrl("/doLogin").permitAll();
+		http.formLogin().usernameParameter("username").passwordParameter("password");
+		http.exceptionHandling().accessDeniedPage("/forbidden.jsp");
+		/*http.formLogin().failureUrl("/error.html");
+		http.formLogin().defaultSuccessUrl("/test.jsp",true);*/
 	}
 	
 }

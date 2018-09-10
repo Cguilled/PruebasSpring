@@ -18,6 +18,4 @@ public class UserService {
 	public Usuarios login(String u, String p) {
 		return usarios_dao.findByDasAndPass(u, p);
 	}
-
-
 }
