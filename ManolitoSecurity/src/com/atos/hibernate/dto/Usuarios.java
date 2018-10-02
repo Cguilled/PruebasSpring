@@ -17,7 +17,7 @@ public class Usuarios implements java.io.Serializable {
 	private String nombre;
 	private String apellido;
 	private String password;
-	private String estado;
+	private Boolean estado;
 	private Roles roles;
 	private Boolean inicio;
 
@@ -34,7 +34,7 @@ public class Usuarios implements java.io.Serializable {
 
 	/** full constructor */
 	public Usuarios(String das, String nombre, String apellido,
-			String password, String estado, Roles roles, Boolean inicio) {
+			String password, Boolean estado, Roles roles, Boolean inicio) {
 		this.das = das;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -84,12 +84,12 @@ public class Usuarios implements java.io.Serializable {
 		this.password = password;
 	}
 
-	@Column(name = "ESTADO", nullable = false, length = 10)
-	public String getEstado() {
+	@Column(name = "ESTADO", nullable = false)
+	public Boolean getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
 

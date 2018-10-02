@@ -73,10 +73,14 @@ public class CustomUrlAuthenticationSuccessHandler implements AuthenticationSucc
 		
 		if(!user.getInicio())
 			return "/cambioPass.xhtml";
-		else if (isUser)
+		else if (isUser && user.getEstado())
 			return "/user/menuUser.xhtml";
+		else if (isUser && !user.getEstado())
+			return "/error/sinacceso.xhtml";
 		else if (isAdmin)
 			return "/admin/menuAdmin.xhtml";
+		else if(!user.getEstado())
+			return "/error/sinacceso.xhtml";
 		else
 			return "/error/error.html";
 	}

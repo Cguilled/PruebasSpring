@@ -57,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 				.exceptionHandling().accessDeniedPage("/error/forbidden.xhtml")
 			.and()
-				//proteccion contra ataques de secuestro de sesion cuando el usuario vuelve a hacer log in.
+				//proteccion contra ataques de secuestro de sesion cuando el usuario vuelve a hacer log in. (no va)
 				.sessionManagement().sessionFixation().migrateSession() 
 		    	.maximumSessions(1).expiredUrl("/expired/expired.xhtml"); //Pagina para cuando expire la sesion
 	}
