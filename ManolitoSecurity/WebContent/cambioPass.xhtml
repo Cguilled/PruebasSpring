@@ -44,11 +44,17 @@
 
 				<ace:pushButton id="botonComprobar" value="Cambiar pass"
 					actionListener="#{password_bean.pass_check}" />
-					<!-- action="#{login_bean.siguiente_pagina}" -->
+				<!-- action="#{login_bean.siguiente_pagina}" -->
 
 			</h:panelGrid>
 
 		</ace:dialog>
 	</h:form>
+	<h:panelGrid id="panel_formuAdmin_logout" columns="1"
+		style="margin: 0 auto; text-align: center;">
+		<form action="${request.contextPath}/logout" method="post">
+			<input type="submit" value="Cerrar sesión" />
+		</form>
+	</h:panelGrid>
 </h:body>
 </html>
