@@ -7,13 +7,14 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:icecore="http://www.icefaces.org/icefaces/core"
 	xmlns:ace="http://www.icefaces.org/icefaces/components">
-	<ui:param name="title" value="#{msgs['example.ace.dialog.title']}" />
-	<ui:param name="description"
-		value="#{msgs['example.ace.dialog.description']}" />
+<ui:param name="title" value="#{msgs['example.ace.dialog.title']}" />
+<ui:param name="description"
+	value="#{msgs['example.ace.dialog.description']}" />
 
 	<!-- FORMULARIO DE LA VISTA -->
-	<h:form id="formu_login" action="${request.contextPath}/doLogin" method="post">
-		<ace:dialog id="dialogLogin" binding="#{dialog}"
+	<h:form id="formu_login" action="${request.contextPath}/doLogin"
+		method="post">
+		<ace:dialog id="dialogLogin" binding="#{dialogLogin}"
 			header="Iniciar sesión" closable="false" modal="true"
 			draggable="false" showEffect="explode" hideEffect="puff" width="400"
 			visible="#{login_bean.visible}">
@@ -22,16 +23,17 @@
 			<h:panelGrid id="panel_formu" columns="1"
 				style="margin: 0 auto; text-align: center;">
 				<!-- COMPONENTES DEL FORMULARIO -->
-				<ace:textEntry id="username" name="username" value="#{login_bean.das}"
-					label="Usuario" labelPosition="top" required="true"
-					requiredIndicator="*"
+				<ace:textEntry id="username" name="username"
+					value="#{login_bean.das}" label="Usuario" labelPosition="top"
+					required="true" requiredIndicator="*"
 					validatorMessage="Usuario: tamaño incorrecto.">
 					<f:validateLength minimum="3" maximum="15" />
 				</ace:textEntry>
 
-				<ace:textEntry id="password" name="password" value="#{login_bean.password}"
-					label="Contraseña" labelPosition="top" required="true"
-					secret="true" requiredIndicator="*" indicatorPosition="right"
+				<ace:textEntry id="password" name="password"
+					value="#{login_bean.password}" label="Contraseña"
+					labelPosition="top" required="true" secret="true"
+					requiredIndicator="*" indicatorPosition="right"
 					validatorMessage="Contraseña: tamaño incorrecto.">
 					<f:validateLength minimum="3" maximum="10" />
 				</ace:textEntry>
