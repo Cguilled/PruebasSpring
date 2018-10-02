@@ -36,11 +36,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {	
+		//Permisos segun rol, pagina de login y logout y sesion
 		http
 			.csrf().disable()
 			.authorizeRequests().antMatchers("/login.jsp").permitAll()
 				.antMatchers("/admin/**").hasAuthority("ADMIN")
-				.antMatchers("/user/**").hasAnyAuthority("ADM5IN","USER")
+				.antMatchers("/user/**").hasAnyAuthority("ADMIN","USER")
 				.antMatchers("/expired/**").hasAnyAuthority("ADMIN","USER")
 				.antMatchers("/error/**").hasAnyAuthority("ADMIN","USER")
 				.anyRequest().authenticated()

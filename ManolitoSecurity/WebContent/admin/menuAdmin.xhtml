@@ -7,11 +7,12 @@
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
 	xmlns:icecore="http://www.icefaces.org/icefaces/core"
 	xmlns:ace="http://www.icefaces.org/icefaces/components"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	style="background-color: #3f90d0">
 <ui:param name="title" value="#{msgs['example.ace.menuBar.title']}" />
 <ui:param name="description"
 	value="#{msgs['example.ace.menuBar.description']}" />
-
+	
 <h:head></h:head>
 
 <h:body>
@@ -42,8 +43,11 @@
 		</h:panelGrid>
 		<!-- <ui:include src="#{menubar_bean.siguiente}" /> -->
 	</h:form>
-	<form action="${request.contextPath}/logout" method="post">
-		<input type="submit" value="Cerrar sesión" />
-	</form>
+	ç<h:panelGrid id="panel_formuAdmin_logout" columns="1"
+		style="margin: 0 auto; text-align: center;">
+		<form action="${request.contextPath}/logout" method="post">
+			<input type="submit" value="Cerrar sesión" />
+		</form>
+	</h:panelGrid>
 </h:body>
 </html>
