@@ -39,20 +39,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//Permisos segun rol, pagina de login y logout y sesion
 		http
 			.csrf().disable()
-			.authorizeRequests().antMatchers("/login.jsp").permitAll()
+			.authorizeRequests().antMatchers("/login.xhtml").permitAll()
 				.antMatchers("/admin/**").hasAuthority("ADMIN")
 				.antMatchers("/user/**").hasAnyAuthority("ADMIN","USER")
 				.antMatchers("/expired/**").hasAnyAuthority("ADMIN","USER")
 				.antMatchers("/error/**").hasAnyAuthority("ADMIN","USER")
 				.anyRequest().authenticated()
 			.and()
-				.formLogin().loginPage("/login.jsp") //Pagina de login
+				.formLogin().loginPage("/login.xhtml") //Pagina de login
 				.loginProcessingUrl("/doLogin") //importante, es la url request del servlet de login de spring security (post)
 				.failureUrl("/error/error.html")
 				.successHandler(customAuthenticationSuccessHandler()) //Clase para redireccionar
 				.usernameParameter("username").passwordParameter("password") //Parametros del login
 			.and()
-				.logout().logoutUrl("/logout").logoutSuccessUrl("/login.jsp").invalidateHttpSession(true)
+				.logout().logoutUrl("/logout").logoutSuccessUrl("/login.xhtml").invalidateHttpSession(true)
 				//.logoutSuccessHandler(CustomLogoutSuccessHandler())
 			.and()
 				.exceptionHandling().accessDeniedPage("/error/forbidden.xhtml")

@@ -34,10 +34,11 @@ public class CustomUrlAuthenticationSuccessHandler implements AuthenticationSucc
 			Authentication authentication) throws IOException, ServletException {
 		handle(request, response, authentication);
 		
+		//Session timeout
 		HttpSession session = request.getSession(false);
-	    if (session != null) {
+	    if (session != null) 
 	        session.setMaxInactiveInterval(10);
-	    }
+	    
 	    
 		clearAuthenticationAttributes(request);
 	}
