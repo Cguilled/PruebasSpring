@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components">
+
+<h:head>
+</h:head>
+
+<h:body>
+
+<style>
+	body {
+		background: #76b852; /* fallback for old browsers */
+		background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+		background: -moz-linear-gradient(right, #76b852, #8DC26F);
+		background: -o-linear-gradient(right, #76b852, #8DC26F);
+		background: linear-gradient(to left, #76b852, #8DC26F);
+		font-family: "Roboto", sans-serif;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+</style>
+
+	<h2>Página de usuarios.</h2>
+	<form action="${request.contextPath}/logout" method="post">
+		<h:commandButton type="submit" value="Cerrar Sesión" />
+	</form>
+</h:body>
+</html>

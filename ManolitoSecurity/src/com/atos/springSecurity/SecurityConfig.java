@@ -1,25 +1,20 @@
 package com.atos.springSecurity;
 
-import java.util.EnumSet;
-
-import javax.servlet.ServletContext;
-import javax.servlet.SessionTrackingMode;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 @EnableWebSecurity
-//@Configuration
+@Configuration
 //@ImportResource("classpath:/com/atos/spring/modelo.xml")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
@@ -27,10 +22,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private UserService userService;
 	
 	protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		// Usuario en memoria
-		//auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ROL_ADMIN");
-
-		//Encriptado de contrasena
 		auth.authenticationProvider(authProvider());
 	}
 
@@ -53,7 +44,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.usernameParameter("username").passwordParameter("password") //Parametros del login
 			.and()
 				.logout().logoutUrl("/logout").logoutSuccessUrl("/login.xhtml").invalidateHttpSession(true)
-				//.logoutSuccessHandler(CustomLogoutSuccessHandler())
 			.and()
 				.exceptionHandling().accessDeniedPage("/error/forbidden.xhtml")
 			.and()

@@ -20,6 +20,7 @@
 	<!-- FORMULARIO DE LA VISTA -->
 	<form id="formu_login" action="${request.contextPath}/doLogin"
 		method="post" prependId="false">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<ace:dialog id="dialogLogin" binding="#{dialogLogin}"
 			header="Iniciar sesión" closable="false" modal="true"
 			draggable="false" showEffect="explode" hideEffect="puff" width="400"
@@ -45,8 +46,6 @@
 				<!-- value="#{login_bean.password}" -->
 
 				<h:commandButton name="botonComprobar" value="Iniciar sesión"/>
-				<!-- actionListener="#{login_bean.login_check}" -->
-				<!-- action="#{login_bean.siguiente_pagina}" -->
 
 			</h:panelGrid>
 

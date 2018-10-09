@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components">
+<h:head>
+</h:head>
+
+<h:body>
+
+<style>
+	@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+	
+	.login-page {
+		width: 360px;
+		padding: 8% 0 0;
+		margin: auto;
+	}
+	
+	.login-form{
+		margin-top: 10pt;
+	}
+	
+	.divform {
+		position: relative;
+		z-index: 1;
+		background: #FFFFFF;
+		max-width: 360px;
+		margin: 0 auto 100px;
+		padding: 45px;
+		text-align: center;
+		box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0
+			rgba(0, 0, 0, 0.24);
+	}
+	
+	#btnlogin{
+		margin-top: 10pt;
+	}
+	
+	.divform textEntry {
+			font-family: "Roboto", sans-serif;
+			outline: 0;
+			background: #f2f2f2;
+			width: 100%;
+			border: 0;
+			margin: 0 0 15px;
+			margin-bottom: 100px;
+			padding: 15px;
+			box-sizing: border-box;
+			font-size: 14px;
+	}
+	
+	#btnlogin {
+		font-family: "Roboto", sans-serif;
+		text-transform: uppercase;
+		outline: 0;
+		background: #4CAF50;
+		width: 60%;
+		border: 0;
+		padding: 15px;
+		color: #FFFFFF;
+		font-size: 14px;
+		-webkit-transition: all 0.3 ease;
+		transition: all 0.3 ease;
+		cursor: pointer;
+	}
+	
+	#btnlogin:hover{
+		background: #43A047;
+	}
+	
+	.span-login{
+		font-family: "Roboto", sans-serif;
+		font-size: 18pt;
+		font-weight: bold;
+		margin-bottom: 10pt;
+		text-transform: uppercase;
+	}
+	
+	body {
+		background: #76b852; /* fallback for old browsers */
+		background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+		background: -moz-linear-gradient(right, #76b852, #8DC26F);
+		background: -o-linear-gradient(right, #76b852, #8DC26F);
+		background: linear-gradient(to left, #76b852, #8DC26F);
+		font-family: "Roboto", sans-serif;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+</style>
+
+	<font color="red"> <h:outputLabel
+			value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
+	</font>
+
+	<div class="login-page">
+		<div class="divform">
+			<span class="span-login">Login</span>
+			<form class="login-form" action="${request.contextPath}/login"
+				method="post">
+				
+				<ace:textEntry id="textDas" name="das" label="DAS"
+					labelPosition="top" required="true" />
+
+				<ace:textEntry name="password" label="Contraseña"
+					labelPosition="top" required="true" secret="true"
+					indicatorPosition="right" />
+
+				<h:commandButton id="btnlogin" name="botonComprobar" value="Iniciar sesión" />
+			</form>
+		</div>
+	</div>
+
+</h:body>
+</html>
