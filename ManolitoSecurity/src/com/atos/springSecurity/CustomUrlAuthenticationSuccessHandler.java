@@ -3,7 +3,9 @@ package com.atos.springSecurity;
 import java.io.IOException;
 import java.util.Collection;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.component.UIComponent;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,10 +37,9 @@ public class CustomUrlAuthenticationSuccessHandler implements AuthenticationSucc
 		handle(request, response, authentication);
 		
 		//Session timeout
-		HttpSession session = request.getSession(false);
-	    if (session != null) 
-	        session.setMaxInactiveInterval(10);
-	    
+		HttpSession session = request.getSession();
+	    if (session != null)
+	        session.setMaxInactiveInterval(60);
 	    
 		clearAuthenticationAttributes(request);
 	}
@@ -77,11 +78,11 @@ public class CustomUrlAuthenticationSuccessHandler implements AuthenticationSucc
 		else if (isUser && user.getEstado())
 			return "/user/menuUser.xhtml";
 		else if (isUser && !user.getEstado())
-			return "/error/sinacceso.xhtml";
+			return "/error/forbidden.xhtml";
 		else if (isAdmin)
 			return "/admin/menuAdmin.xhtml";
 		else if(!user.getEstado())
-			return "/error/sinacceso.xhtml";
+			return "/error/forbidden.xhtml";
 		else
 			return "/error/error.html";
 	}

@@ -15,28 +15,22 @@
 <h:head></h:head>
 
 <h:body>
-	<h:form id="formu_menuUser">
+	<form id="formu_menuUser" action="${request.contextPath}/logout"
+		method="post">
 		<!-- CONTENEDOR DE LOS COMPONENTES -->
-		<h:panelGrid id="panel_formuAdmin" columns="1"
+		<h:panelGrid id="panel_formuUser" columns="1"
 			style="margin: 0 auto; text-align: center;">
 			<ace:menuBar id="menuBar" autoSubmenuDisplay="true">
-
-				<!-- <ace:menuItem id="itemUsuarios" value="Usuarios"
-					url="http://www.icefaces.org" target="_blank" />
-
-				<ace:menuItem id="itemTareas" value="Tareas"
-					url="http://www.icefaces.org" target="_blank" />
-
-				<ace:menuItem id="itemRoles" value="Roles"
-					url="http://www.icefaces.org" target="_blank" /> -->
 
 				<ace:menuItem id="itemConsultar" value="Consultar"
 					url="http://www.icefaces.org" target="_blank" />
 
-				<ace:menuItem id="itemFinSesion" value="Finalizar sesión"
-					url="/login.jsp" target="_blank" />
+				<ace:menuItem id="itemFinSesion" value="Finalizar sesión">
+					<h:commandButton value="Cerrar sesión" />
+				</ace:menuItem>
+
 			</ace:menuBar>
 		</h:panelGrid>
-	</h:form>
+	</form>
 </h:body>
 </html>

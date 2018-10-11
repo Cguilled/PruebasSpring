@@ -12,12 +12,13 @@
 <ui:param name="title" value="#{msgs['example.ace.menuBar.title']}" />
 <ui:param name="description"
 	value="#{msgs['example.ace.menuBar.description']}" />
-	
+
 <h:head></h:head>
 
 <h:body>
 
-	<h:form id="formu_menuAdmin" method="POST">
+	<h:form id="form_menuAdmin" action="${request.contextPath}/logout"
+		method="post">
 
 		<!-- CONTENEDOR DE LOS COMPONENTES -->
 		<h:panelGrid id="panel_formuAdmin" columns="1"
@@ -25,29 +26,36 @@
 
 			<ace:menuBar id="menuBar" autoSubmenuDisplay="true">
 				<ace:menuItem id="itemUsuarios" value="Usuarios"
-					actionListener="#{menubar_bean.fragmentUsuarios}" />
+					actionListener="#{menubar_bean.fragmentUsuarios}"
+					url="/xhtml/Usuarios.xhtml" />
 
 				<ace:menuItem id="itemTareas" value="Tareas"
-					actionListener="#{menubar_bean.fragmentTareas}" />
+					actionListener="#{menubar_bean.fragmentTareas}"
+					url="/admin/altaTareas.xhtml" />
 
 				<ace:menuItem id="itemRoles" value="Roles"
-					actionListener="#{menubar_bean.fragmentRoles}" />
+					actionListener="#{menubar_bean.fragmentRoles}"
+					url="/xhtml/Roles.xhtml" />
 
 				<ace:menuItem id="itemConsultar" value="Consultar"
-					action="http://www.icefaces.org" />
+					url="http://www.icefaces.org" target="_blank" />
 
-				<!-- <ace:menuItem id="itemFinSesion" value="Logout" action="/logout" />
-				actionListener="#{menubar_bean.logout}" -->
+				<!-- <ace:menuItem id="itemFinSesion" value="Finalizar sesión">
+					<h:commandButton value="Cerrar sesión" />
+				</ace:menuItem> -->
 			</ace:menuBar>
 
 		</h:panelGrid>
-		<!-- <ui:include src="#{menubar_bean.siguiente}" /> -->
+
 	</h:form>
-	<h:panelGrid id="panel_formuAdmin_logout" columns="1"
-		style="margin: 0 auto; text-align: center;">
-		<form action="${request.contextPath}/logout" method="post">
-			<input type="submit" value="Cerrar sesión" />
-		</form>
-	</h:panelGrid>
+
+	<!-- <ui:include src="#{menubar_bean.siguiente}" /> -->
+	<form action="${request.contextPath}/logout" method="post">
+		<h:panelGrid id="panel_formuAdmin_logout" columns="1"
+			style="margin: 0 auto; text-align: center;">
+			<h:commandButton value="Cerrar sesión" />
+		</h:panelGrid>
+	</form>
+
 </h:body>
 </html>

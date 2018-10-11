@@ -72,8 +72,10 @@ public class Tareas_Bean {
 
 	public void consultar_PorCodigo(ActionEvent evento) {
 		try {
-			gestionTareas.consultar_PorCodigoTarea(tarea);
-			System.out.println("consulta correcta");
+			if(gestionTareas.consultar_PorCodigoTarea(tarea) !=null) {
+				System.out.println("consulta correcta");
+			}else
+				System.out.println("No existe ese id de tarea");
 		} catch (DataAccessException dae) {
 			dae.printStackTrace();
 		}

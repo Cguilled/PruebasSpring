@@ -58,9 +58,9 @@ public class UsuariosDAO {
 	//Recuperar un objeto de tipo Usuarios a partir de un Id
 	public Usuarios findById(java.lang.Integer id) {
 		try {
-			Usuarios instance = (Usuarios) getCurrentSession().get(
+			Usuarios usuario = (Usuarios) getCurrentSession().get(
 					"com.atos.hibernate.dto.Usuarios", id);
-			return instance;
+			return usuario;
 		} catch (RuntimeException re) {
 			throw re;
 		}

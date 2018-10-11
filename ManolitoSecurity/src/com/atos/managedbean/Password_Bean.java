@@ -30,14 +30,8 @@ public class Password_Bean implements Serializable {
 	@ManagedProperty("#{gestionUsuarios}")
 	private IGestion_Usuarios gestionUsuarios;
 
-	/*@ManagedProperty("#{login_bean.recuperado}")
-	private Usuarios recuperado;*/
-
 	@ManagedProperty("#{mensajes_bean}")
-	private Mensajes_Bean alerta;
-
-	@Autowired
-	private CustomUrlAuthenticationSuccessHandler authSuccessHandler;
+	private Mensajes_Bean mensaje;
 
 	@PostConstruct
 	public void valores_Iniciales() {
@@ -54,7 +48,7 @@ public class Password_Bean implements Serializable {
 		welcomeMessage = "Bienvenido " + auth.getName() + ", escriba una contraseña nueva.";
 	}
 
-	public void pass_check(ActionEvent evento) {
+	public void cambiarPass(ActionEvent evento) {
 		System.out.println("Realizando cambio de contraseña...");
 		try {
 			// comprueba si existe el usuario con la clave
@@ -66,26 +60,26 @@ public class Password_Bean implements Serializable {
 				usuario.setPassword(password);
 				usuario.setInicio(true);
 				gestionUsuarios.modificacion_Usuario(usuario);
-				alerta.setMode(alerta.PASSWORD_CHANGED);
-				alerta.listener(evento);
-				//authSuccessHandler.determineTargetUrl(auth);
-				//siguiente_pagina();
 				System.out.println("Contraseña modificada");
+				mensaje.setMode(mensaje.PASSWORD_CHANGED);
+				mensaje.messageListener(evento);
+				//Volver al login
+				toLogin();
 			} else {
 				System.out.println("Las contrasenas no coinciden");
+				mensaje.setMode(mensaje.PASSWORD_MISMATCH);
 				// escribir mensaje de fallo
-				alerta.setMode(alerta.PASSWORD_MISMATCH);
-				//alerta.listener(evento);
+				mensaje.messageListener(evento);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public String siguiente_pagina() {
-		System.out.println("Redirigiendo a menuAdmin.xhtml");
+	public String toLogin() {
+		System.out.println("Redirigiendo a login.xhtml");
 		visible = false;
-		siguiente = "/xhtml/menuAdmin.xhtml";
+		siguiente = "/login.xhtml";
 		return "";
 	}
 
@@ -137,11 +131,11 @@ public class Password_Bean implements Serializable {
 		return welcomeMessage;
 	}
 
-	public Mensajes_Bean getAlerta() {
-		return alerta;
+	public Mensajes_Bean getMensaje() {
+		return mensaje;
 	}
 
-	public void setAlerta(Mensajes_Bean alerta) {
-		this.alerta = alerta;
+	public void setMensaje(Mensajes_Bean alerta) {
+		this.mensaje = alerta;
 	}
 }

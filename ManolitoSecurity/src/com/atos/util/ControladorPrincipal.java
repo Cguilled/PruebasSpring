@@ -1,4 +1,4 @@
-package com.atos.springSecurity;
+package com.atos.util;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

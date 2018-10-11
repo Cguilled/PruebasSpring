@@ -52,12 +52,18 @@ public class TareasDAO {
 		Integer codigoTarea = null;
 		try {
 			if (util.consultarCodigoTarea(persistentInstance) != null) {
-				Query q = getCurrentSession().createQuery("DELETE FROM ROLES_TAREAS WHERE CODIGO_TAREAS = ?");
-				q.setInteger(0, persistentInstance.getId_Tarea());
-				codigoTarea = (Integer) q.uniqueResult();
+				Query qRoles_Tareas = getCurrentSession().createQuery("DELETE FROM ROLES_TAREAS WHERE CODIGO_TAREAS = ?");
+				Query qTareas = getCurrentSession().createQuery("DELETE FROM TAREA WHERE CODIGO_TAREA = ?");
+				
+				qRoles_Tareas.setInteger(0, persistentInstance.getId_Tarea());
+				codigoTarea = (Integer) qRoles_Tareas.uniqueResult();
+				
+				qTareas.setInteger(0, persistentInstance.getId_Tarea());
+				codigoTarea = (Integer) qTareas.uniqueResult();
+				
 				getCurrentSession().delete(persistentInstance);
 			}else
-				getCurrentSession().delete(persistentInstance);
+				System.out.println("No existe ese id de tarea");
 		} catch (RuntimeException re) {
 			throw re;
 		}

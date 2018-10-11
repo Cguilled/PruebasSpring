@@ -7,7 +7,8 @@
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
 	xmlns:icecore="http://www.icefaces.org/icefaces/core"
 	xmlns:ace="http://www.icefaces.org/icefaces/components"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	style="background-color: #3f90d0">
 <ui:param name="title" value="#{msgs['example.ace.menuBar.title']}" />
 <ui:param name="description"
 	value="#{msgs['example.ace.menuBar.description']}" />
@@ -16,7 +17,7 @@
 
 <h:body>
 
-	<h:form id="formu_roles">
+	<h:form id="formu_roles" prependId="false">
 		<ace:dialog id="dialogRoles" binding="#{dialogRoles}" header="Roles"
 			closable="false" modal="false" draggable="false" showEffect="explode"
 			hideEffect="puff" width="400" visible="#{roles_bean.visible}">
@@ -25,6 +26,11 @@
 			<h:panelGrid id="panel_formuRoles" columns="1"
 				style="margin: 0 auto; text-align: center;">
 				<!-- COMPONENTES DEL FORMULARIO -->
+				<ace:textEntry id="codigo_rol" value="#{roles_bean.rol.codigoRol}"
+					label="Código" labelPosition="top" required="true"
+					requiredIndicator="*">
+				</ace:textEntry>
+				
 				<ace:textEntry id="nombre_rol" value="#{roles_bean.rol.nombreRol}"
 					label="Nombre" labelPosition="top" required="true"
 					requiredIndicator="*"
@@ -44,6 +50,8 @@
 
 				<ace:pushButton id="botonModificar" value="Modificación"
 					actionListener="#{roles_bean.modificacion_Rol}" />
+				<ace:pushButton id="botonVolver" value="Volver"
+					onclick="window.history.back();" />
 			</h:panelGrid>
 
 		</ace:dialog>

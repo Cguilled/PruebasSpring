@@ -65,7 +65,7 @@ public class Utilidades implements IUtilidades {
 	public Integer consultarCodigoTarea(Tareas transientInstance) {
 		Integer codigoTarea = null;
 		try {
-			Query q = getCurrentSession().createQuery("SELECT CODIGO_TAREAS FROM ROLES_TAREAS WHERE CODIGO_TAREAS = ?");
+			Query q = getCurrentSession().createQuery("SELECT CODIGO_TAREA FROM TAREAS WHERE CODIGO_TAREA = ?");
 			q.setInteger(0, transientInstance.getId_Tarea());
 			codigoTarea = (Integer) q.uniqueResult();
 		} catch (Exception e) {

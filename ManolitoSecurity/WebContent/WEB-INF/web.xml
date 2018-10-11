@@ -37,12 +37,18 @@
 		<param-value>false</param-value>
 	</context-param>
 
+	<!-- Para que icefaces no ponga sus propios id -->
+	<context-param>
+		<param-name>org.icefaces.autoid</param-name>
+		<param-value>false</param-value>
+	</context-param>
+
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	
+
 	<listener>
-	    <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+		<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
 	</listener>
 
 	<context-param>
@@ -50,7 +56,8 @@
 		<param-value>classpath:com/atos/spring/modelo.xml</param-value>
 	</context-param>
 
-	<!-- Para que los datos de la sesion no aparezcan en la URL y se guarden en una cookie -->
+	<!-- Para que los datos de la sesion no aparezcan en la URL y se guarden 
+		en una cookie -->
 	<session-config>
 		<tracking-mode>COOKIE</tracking-mode>
 	</session-config>

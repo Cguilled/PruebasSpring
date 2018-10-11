@@ -53,13 +53,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.usernameParameter("username").passwordParameter("password") //Parametros del login
 			.and()
 				.logout().logoutUrl("/logout").logoutSuccessUrl("/login.xhtml").invalidateHttpSession(true)
-				//.logoutSuccessHandler(CustomLogoutSuccessHandler())
 			.and()
-				.exceptionHandling().accessDeniedPage("/error/forbidden.xhtml")
-			.and()
-				//proteccion contra ataques de secuestro de sesion cuando el usuario vuelve a hacer log in. (no va)
-				.sessionManagement().sessionFixation().migrateSession() 
-		    	.maximumSessions(1).expiredUrl("/expired/expired.xhtml"); //Pagina para cuando expire la sesion
+				.exceptionHandling().accessDeniedPage("/error/forbidden.xhtml");
+
+			//proteccion contra ataques de secuestro de sesion cuando el usuario vuelve a hacer log in. (no va)
+		http
+			.sessionManagement().invalidSessionUrl("/expired/expired.xhtml")
+			.sessionFixation().migrateSession().maximumSessions(1).expiredUrl("/expired/expired.xhtml"); //Pagina para cuando expire la sesion
 	}
 	
 	//Bean de la clase para encriptar la contrasena
@@ -83,13 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationSuccessHandler customAuthenticationSuccessHandler(){
         return new CustomUrlAuthenticationSuccessHandler();
     }
-	
-	//Bean de la clase para logout
-	@Bean
-    public LogoutSuccessHandler CustomLogoutSuccessHandler(){
-        return new CustomLogoutSuccessHandler();
-    }
-	
+
 	//Bean para activar el control simultaneo de la sesion
 	@Bean
 	public HttpSessionEventPublisher httpSessionEventPublisher() {

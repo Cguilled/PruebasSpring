@@ -42,7 +42,7 @@ public class Roles_Bean {
 			try {
 				gestionRoles.alta_Rol(rol);
 				System.out.println("alta correcta");
-			} catch (DataAccessException dae) {
+			} catch (Exception dae) {
 				dae.printStackTrace();
 			}
 		}
@@ -51,8 +51,8 @@ public class Roles_Bean {
 			try {
 				gestionRoles.baja_Rol(rol);
 				System.out.println("baja correcta");
-			} catch (DataAccessException dae) {
-				dae.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 
@@ -60,17 +60,19 @@ public class Roles_Bean {
 			try {
 				gestionRoles.modificacion_Rol(rol);
 				System.out.println("modificación correcta");
-			} catch (DataAccessException dae) {
-				dae.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 
 		public void consultar_PorCodigo(ActionEvent evento) {
 			try {
-				gestionRoles.consultar_PorCodigoRol(rol);
-				System.out.println("consulta correcta");
-			} catch (DataAccessException dae) {
-				dae.printStackTrace();
+				if(gestionRoles.consultar_PorCodigoRol(rol) !=null)
+					System.out.println("consulta correcta");
+				else
+					System.out.println("No existe ese id de rol");
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 

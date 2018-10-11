@@ -19,9 +19,10 @@ public class Mensajes_Bean implements Serializable {
 	// Propiedades del bean
 	private String autoHide = "true";
 	private boolean closeAll = true;
-	private int maxVisibleMessages = 2;
+	private int maxVisibleMessages = 100;
 	private String position = "top-right";
 	private String header = "Error de validación";
+	private int displayDuration = 5000;
 	private int mode;
 
 	public final int PASSWORD_MISMATCH = 1;
@@ -70,6 +71,14 @@ public class Mensajes_Bean implements Serializable {
 		this.header = header;
 	}
 
+	public int getDisplayDuration() {
+		return displayDuration;
+	}
+
+	public void setDisplayDuration(int displayDuration) {
+		this.displayDuration = displayDuration;
+	}
+
 	public void setMode(int mode) {
 		this.mode = mode;
 	}
@@ -79,15 +88,15 @@ public class Mensajes_Bean implements Serializable {
 	}
 
 	public void showPasswordMismatch() {
-		FacesContext.getCurrentInstance().addMessage("Ambas claves no coinciden",
-				new FacesMessage("Ambas claves no coinciden"));
+		FacesContext.getCurrentInstance().addMessage("Las contraseñas no coinciden",
+				new FacesMessage("Las contraseñas no coinciden"));
 	}
 
 	public void showPasswordChangeSuccess() {
-		FacesContext.getCurrentInstance().addMessage("Cambiando clave...", new FacesMessage("Cambiando clave..."));
+		FacesContext.getCurrentInstance().addMessage("Cambiando clave...", new FacesMessage("Cambiando contraseña..."));
 	}
 
-	public void listener(ActionEvent event) {
+	public void messageListener(ActionEvent event) {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 
 		// Eliminar mensajes existentes
@@ -101,27 +110,27 @@ public class Mensajes_Bean implements Serializable {
 
 		if (mode == SUCCESSFUL_LOGIN) {
 			String message = "Iniciando sesión...";
-			FacesMessage facesMessage = new FacesMessage((FacesMessage.Severity) FacesMessage.VALUES.get(0), message,
-					message);
+			setHeader("Info");
+			FacesMessage facesMessage = new FacesMessage(message, message);
 			facesContext.addMessage(component.getClientId(), facesMessage);
 		}
 
 		else if (mode == PASSWORD_CHANGED) {
-			String message = "Clave cambiada";
-			FacesMessage facesMessage = new FacesMessage((FacesMessage.Severity) FacesMessage.VALUES.get(2), message,
-					message);
+			String message = "Contraseña cambiada";
+			setHeader("Info");
+			FacesMessage facesMessage = new FacesMessage(message, message);
 			facesContext.addMessage(component.getClientId(), facesMessage);
 		}
 
 		else if (mode == PASSWORD_MISMATCH) {
-			String message = "Ambas claves no coinciden";
+			String message = "Las contraseñas no coinciden";
 			FacesMessage facesMessage = new FacesMessage((FacesMessage.Severity) FacesMessage.VALUES.get(2), message,
 					message);
 			facesContext.addMessage(component.getClientId(), facesMessage);
 		}
 
 		else if (mode == FAILED_LOGIN) {
-			String message = "Fallo de inicio de sesión";
+			String message = "Fallo al iniciar sesión";
 			FacesMessage facesMessage = new FacesMessage((FacesMessage.Severity) FacesMessage.VALUES.get(2), message,
 					message);
 			facesContext.addMessage(component.getClientId(), facesMessage);
