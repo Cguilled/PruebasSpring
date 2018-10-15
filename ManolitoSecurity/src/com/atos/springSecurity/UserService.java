@@ -32,12 +32,13 @@ public class UserService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String das) throws UsernameNotFoundException {
+		//Consulto el usuario a traves del das introducido en el login
 		Usuarios usuario = gestionUsuarios.consultar_PorDas(das);
 
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
-		// authorities a partir de roles
 		if (usuario != null) {
+			// authorities a partir de roles
 			roles = usuario.getRoles();
 
 			GrantedAuthority ga = new GrantedAuthority() {
@@ -47,8 +48,11 @@ public class UserService implements UserDetailsService {
 					return roles.getNombreRol();
 				}
 			};
+			//Anado los roles del usuario a la lista de tipo Authority
 			authorities.add(ga);
 
+			//Paso los datos del usuario a userDetails para que sean validados contra la bbdd
+			//Condificando la pass
 			userDetails = (UserDetails) new org.springframework.security.core.userdetails.User(
 					usuario.getDas(), encoder.encode(usuario.getPassword()), authorities);
 			

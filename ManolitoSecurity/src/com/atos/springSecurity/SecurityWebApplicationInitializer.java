@@ -1,26 +1,9 @@
 package com.atos.springSecurity;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
+//Clase que inicializa los filtros de Spring Security
+//Si se quiere poner un filtro que se ejecute antes que todos los filtros de Spring Security se hace aqui
 public class SecurityWebApplicationInitializer extends AbstractSecurityWebApplicationInitializer {
 
-	/*public SecurityWebApplicationInitializer() {
-		super(SecurityConfig.class);
-	}*/
-
-	//Para activar la sesion
-	/*@Override
-	public boolean enableHttpSessionEventPublisher() {
-		return true;
-	}
-
-	@Override
-	public void onStartup(ServletContext servletContext) throws ServletException {
-	    super.onStartup(servletContext);
-	    servletContext.addListener(new SessionListener());
-	}*/
 }

@@ -93,7 +93,7 @@ public class Mensajes_Bean implements Serializable {
 	}
 
 	public void showPasswordChangeSuccess() {
-		FacesContext.getCurrentInstance().addMessage("Cambiando clave...", new FacesMessage("Cambiando contraseña..."));
+		FacesContext.getCurrentInstance().addMessage("Cambiando contraseña...", new FacesMessage("Cambiando contraseña..."));
 	}
 
 	public void messageListener(ActionEvent event) {

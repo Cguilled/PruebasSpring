@@ -92,19 +92,19 @@ public class MenuBar_Bean implements Serializable, ActionListener {
 
 	public String formUsuarios() {
 		System.out.println("Redirigiendo a Usuarios.xhtml");
-		siguiente = "/xhtml/Usuarios.xhtml";
+		siguiente = "/admin/Usuarios.xhtml";
 		return "";
 	}
 
 	public String formTareas() {
-		System.out.println("Redirigiendo a Tareas.xhtml");
-		siguiente = "/xhtml/Tareas.xhtml";
+		System.out.println("Redirigiendo a altaTareas.xhtml");
+		siguiente = "/admin/altaTareas.xhtml";
 		return siguiente;
 	}
 
 	public String formRoles() {
 		System.out.println("Redirigiendo a Roles.xhtml");
-		siguiente = "/xhtml/Roles.xhtml";
+		siguiente = "/admin/Roles.xhtml";
 		return siguiente;
 	}
 

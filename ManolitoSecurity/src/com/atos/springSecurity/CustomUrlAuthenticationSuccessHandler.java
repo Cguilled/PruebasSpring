@@ -39,7 +39,7 @@ public class CustomUrlAuthenticationSuccessHandler implements AuthenticationSucc
 		//Session timeout
 		HttpSession session = request.getSession();
 	    if (session != null)
-	        session.setMaxInactiveInterval(60);
+	        session.setMaxInactiveInterval(10);
 	    
 		clearAuthenticationAttributes(request);
 	}

@@ -1,10 +1,5 @@
 package com.atos.springSecurity;
 
-import java.util.EnumSet;
-
-import javax.servlet.ServletContext;
-import javax.servlet.SessionTrackingMode;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -12,10 +7,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 @EnableWebSecurity
@@ -27,9 +20,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private UserService userService;
 	
 	protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		// Usuario en memoria
-		//auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ROL_ADMIN");
-
 		//Encriptado de contrasena
 		auth.authenticationProvider(authProvider());
 	}
@@ -39,10 +29,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//Permisos segun rol, pagina de login y logout y sesion
 		http
 			.csrf().disable()
-			.authorizeRequests().antMatchers("/login.xhtml").permitAll()
+			//"/javax.faces.resource/**" para que spring security tenga accesso a la carpeta de estilos de icefaces y los muestre bien
+			.authorizeRequests().antMatchers("/javax.faces.resource/**","/login.xhtml", "/expired/**").permitAll()
 				.antMatchers("/admin/**").hasAuthority("ADMIN")
 				.antMatchers("/user/**").hasAnyAuthority("ADMIN","USER")
-				.antMatchers("/expired/**").hasAnyAuthority("ADMIN","USER")
 				.antMatchers("/error/**").hasAnyAuthority("ADMIN","USER")
 				.anyRequest().authenticated()
 			.and()
@@ -52,14 +42,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.successHandler(customAuthenticationSuccessHandler()) //Clase para redireccionar
 				.usernameParameter("username").passwordParameter("password") //Parametros del login
 			.and()
-				.logout().logoutUrl("/logout").logoutSuccessUrl("/login.xhtml").invalidateHttpSession(true)
+				//Timeout invalida sesion, logout no
+				.logout().logoutUrl("/logout").logoutSuccessUrl("/login.xhtml").invalidateHttpSession(false).deleteCookies("JSESSIONID")
+				
 			.and()
 				.exceptionHandling().accessDeniedPage("/error/forbidden.xhtml");
 
 			//proteccion contra ataques de secuestro de sesion cuando el usuario vuelve a hacer log in. (no va)
 		http
-			.sessionManagement().invalidSessionUrl("/expired/expired.xhtml")
-			.sessionFixation().migrateSession().maximumSessions(1).expiredUrl("/expired/expired.xhtml"); //Pagina para cuando expire la sesion
+			.sessionManagement().invalidSessionUrl("/expired/expired.xhtml");
+			//.sessionFixation().migrateSession().maximumSessions(1).expiredUrl("/expired/expired.xhtml"); //Pagina para cuando expire la sesion
 	}
 	
 	//Bean de la clase para encriptar la contrasena
@@ -68,7 +60,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 	
-	//Bean para encriptar la contrasena
 	@Bean
 	public DaoAuthenticationProvider authProvider() {
 	    DaoAuthenticationProvider daoAuth = new DaoAuthenticationProvider();
@@ -89,17 +80,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public HttpSessionEventPublisher httpSessionEventPublisher() {
 	    return new HttpSessionEventPublisher();
 	}
-	
-	//Injecting the Raw Session into a Controller
-	/*@RequestMapping(..)
-	public void fooMethod(HttpSession session) {
-	    session.addAttribute(Constants.FOO, new Foo();
-	    //...
-	    Foo foo = (Foo) session.getAttribute(Constants.Foo);
-	}*/
-	
-	//The current HTTP Session can also be obtained programmatically via the raw Servlet API:
-	/*ServletRequestAttributes attr = (ServletRequestAttributes) 
-    RequestContextHolder.currentRequestAttributes();
-	HttpSession session= attr.getRequest().getSession(true);*/ // true == allow create
 }
